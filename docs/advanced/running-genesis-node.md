@@ -19,7 +19,7 @@ Recommended (for highload applications):
 
 ### Operating System
 
-Current delivery is compiled and tested under `Ubuntu 18.04.3 LTS` so we recommend using this distribution for now. In future, it will be possible to compile the application for a wide range of operating systems thanks to Go language.
+Current delivery is compiled and tested under `Ubuntu 20.04 LTS` so we recommend using this distribution for now. In future, it will be possible to compile the application for a wide range of operating systems thanks to Go language.
 
 ## Components
 
@@ -44,7 +44,7 @@ must have a unique chain ID.
     * `dcld config output json` - Output format (text/json).
 
 4. Prepare keys:
-    * Derive a new private key and encrypt to disk: `dcld keys add <name>`.
+    * Derive a new private key and encrypt to disk: `dcld keys add <name>` (run `dcld config keyring-backend test` before in case of error).
     Expected output format: 
         ```json
         {
@@ -65,7 +65,7 @@ must have a unique chain ID.
     * Add genesis account with the generated key and `Trustee`, `NodeAdmin` roles:
     `dcld add-genesis-account --address=<address> --pubkey=<pubkey> --roles="Trustee,NodeAdmin"`
     * Optionally, add other genesis accounts using the same command.
-    * Create genesis transaction: `dcld gentx --from <name>`, where `<name>` is the keys' name specified at Step 4. 
+    * Create genesis transaction: `dcld gentx <name> --chain-id <chain-id>`, where `<name>` is the keys' name specified at Step 4. 
     * Collect genesis transactions: `dcld collect-gentxs`.
     * Validate genesis file: `dcld validate-genesis`.
     * Genesis file is located in `$HOME/.dcl/config/genesis.json`. Give this file to each new node admin.
